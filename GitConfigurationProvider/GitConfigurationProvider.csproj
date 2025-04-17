@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="build settings">
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="build metadata">
+    <PackageId>KageKirin.Extensions.Configuration.GitConfig</PackageId>
+    <Title>Git Configuration Provider</Title>
+    <Description>Microsoft.Extensions.Configuration.ConfigurationProvider for .gitconfig</Description>
+    <PackageTags>configuration;git;gitconfig</PackageTags>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageIconUrl>https://raw.github.com/KageKirin/GitConfigurationProvider/main/Icon.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <ItemGroup Label="build dependencies">
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="LibGit2Sharp" />
+  </ItemGroup>
+
+</Project>
