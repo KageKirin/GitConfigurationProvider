@@ -10,12 +10,13 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
     readonly LibGit2Sharp.Configuration? configuration;
     readonly bool optional = true;
 
-    public GitConfigurationProvider()
-        : this(Environment.CurrentDirectory) { }
+    public GitConfigurationProvider(bool optional = true)
+        : this(path: Environment.CurrentDirectory, optional: optional) { }
 
-    public GitConfigurationProvider(string path)
+    public GitConfigurationProvider(string path, bool optional = true)
     {
-        configuration = LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null);
+        this.configuration = LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null);
+        this.optional = optional;
     }
 
     public override void Load()
