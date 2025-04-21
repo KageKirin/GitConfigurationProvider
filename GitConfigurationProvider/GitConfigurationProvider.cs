@@ -8,23 +8,31 @@ namespace KageKirin.Extensions.Configuration.GitConfig;
 public class GitConfigurationProvider : ConfigurationProvider, IDisposable
 {
     readonly LibGit2Sharp.Configuration? configuration;
+    readonly bool optional = true;
 
-    public GitConfigurationProvider()
-        : this(Environment.CurrentDirectory) { }
+    public GitConfigurationProvider(bool optional = true)
+        : this(path: Environment.CurrentDirectory, optional: optional) { }
 
-    public GitConfigurationProvider(string path)
+    public GitConfigurationProvider(string path, bool optional = true)
     {
-        configuration = LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null);
+        this.configuration = LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null);
+        this.optional = optional;
     }
 
     public override void Load()
     {
-        Debug.Assert(configuration != null);
+        if (!optional)
+            Debug.Assert(configuration != null);
 
-        foreach (var entry in configuration)
+        if (configuration != null)
         {
-            Console.WriteLine($"[gitconfig] reading [{entry.Level}] {entry.Key}: {entry.Value}");
-            Data[entry.Key.Replace(".", ":")] = entry.Value;
+            //configuration.ConfigurationEntry<T> Get<T>(string[] keyParts) for direct access? ms_configString.Split(':') to get key parts
+
+            foreach (var entry in configuration)
+            {
+                Console.WriteLine($"[gitconfig] reading [{entry.Level}] {entry.Key}: {entry.Value}");
+                Data[entry.Key.Replace(".", ":")] = entry.Value;
+            }
         }
     }
 

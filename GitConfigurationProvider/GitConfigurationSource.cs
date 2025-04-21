@@ -7,14 +7,14 @@ public class GitConfigurationSource : IConfigurationSource
 {
     readonly Func<GitConfigurationProvider> buildAction;
 
-    public GitConfigurationSource()
+    public GitConfigurationSource(bool optional = true)
     {
-        buildAction = () => new GitConfigurationProvider();
+        buildAction = () => new GitConfigurationProvider(optional: optional);
     }
 
-    public GitConfigurationSource(string path)
+    public GitConfigurationSource(string path, bool optional = true)
     {
-        buildAction = () => new GitConfigurationProvider(path: path);
+        buildAction = () => new GitConfigurationProvider(path: path, optional: optional);
     }
 
     public IConfigurationProvider Build(IConfigurationBuilder builder)
