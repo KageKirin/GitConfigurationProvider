@@ -8,6 +8,7 @@ namespace KageKirin.Extensions.Configuration.GitConfig;
 public class GitConfigurationProvider : ConfigurationProvider, IDisposable
 {
     readonly LibGit2Sharp.Configuration? configuration;
+    readonly bool optional = true;
 
     public GitConfigurationProvider()
         : this(Environment.CurrentDirectory) { }
