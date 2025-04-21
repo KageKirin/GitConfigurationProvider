@@ -24,10 +24,15 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
         if (!optional)
             Debug.Assert(configuration != null);
 
-        foreach (var entry in configuration)
+        if (configuration != null)
         {
-            Console.WriteLine($"[gitconfig] reading [{entry.Level}] {entry.Key}: {entry.Value}");
-            Data[entry.Key.Replace(".", ":")] = entry.Value;
+            //configuration.ConfigurationEntry<T> Get<T>(string[] keyParts) for direct access? ms_configString.Split(':') to get key parts
+
+            foreach (var entry in configuration)
+            {
+                Console.WriteLine($"[gitconfig] reading [{entry.Level}] {entry.Key}: {entry.Value}");
+                Data[entry.Key.Replace(".", ":")] = entry.Value;
+            }
         }
     }
 
