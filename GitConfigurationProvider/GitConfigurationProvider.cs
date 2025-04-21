@@ -21,7 +21,8 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
 
     public override void Load()
     {
-        Debug.Assert(configuration != null);
+        if (!optional)
+            Debug.Assert(configuration != null);
 
         foreach (var entry in configuration)
         {
