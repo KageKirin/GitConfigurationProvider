@@ -10,6 +10,12 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
     readonly LibGit2Sharp.Configuration? configuration;
     readonly bool optional = true;
 
+    public GitConfigurationProvider(LibGit2Sharp.Configuration configuration, bool optional = true)
+    {
+        this.configuration = configuration;
+        this.optional = optional;
+    }
+
     public GitConfigurationProvider(bool optional = true)
         : this(path: Environment.CurrentDirectory, optional: optional) { }
 
