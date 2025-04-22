@@ -19,8 +19,15 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
     public GitConfigurationProvider(bool optional = true)
         : this(path: Environment.CurrentDirectory, optional: optional) { }
 
-    public GitConfigurationProvider(string path, bool optional = true)
-        : this(LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null), optional: optional) { }
+    public GitConfigurationProvider(string path, bool optional = true, bool reloadOnChange = false)
+        : this(
+            repositoryConfigurationPath: Repository.Discover(path),
+            globalConfigurationPath: null,
+            xdgConfigurationPath: null,
+            systemConfigurationPath: null,
+            optional: optional,
+            reloadOnChange: reloadOnChange
+        ) { }
 
     public GitConfigurationProvider(Repository repository, bool optional = true)
         : this(configuration: repository.Config, optional: optional) { }
