@@ -67,6 +67,12 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
         }
     }
 
+    private void Reload()
+    {
+        Data.Clear();
+        Load();
+    }
+
     public void Dispose()
     {
         configuration?.Dispose();
