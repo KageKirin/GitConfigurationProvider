@@ -22,6 +22,23 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
     public GitConfigurationProvider(string path, bool optional = true)
         : this(LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null), optional: optional) { }
 
+    public GitConfigurationProvider(
+        string repositoryConfigurationPath,
+        string globalConfigurationPath,
+        string xdgConfigurationPath,
+        string systemConfigurationPath,
+        bool optional = true
+    )
+        : this(
+            configuration: LibGit2Sharp.Configuration.BuildFrom(
+                repositoryConfigurationPath,
+                globalConfigurationPath,
+                xdgConfigurationPath,
+                systemConfigurationPath
+            ),
+            optional: optional
+        ) { }
+
     public override void Load()
     {
         if (!optional)
