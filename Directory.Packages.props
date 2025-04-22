@@ -8,6 +8,7 @@
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.FileProviders.Composite" Version="9.0.4" />
+    <PackageVersion Include="Microsoft.Extensions.FileProviders.Physical" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.4" />
   </ItemGroup>
 
