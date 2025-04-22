@@ -15,6 +15,12 @@ public static class GitConfigurationProviderExtension
         return builder;
     }
 
+    public static IConfigurationBuilder AddGitConfig(this IConfigurationBuilder builder, Repository repository, bool optional = true)
+    {
+        builder.Add(new GitConfigurationSource(repository, optional: optional));
+        return builder;
+    }
+
     public static IConfigurationBuilder AddGitConfig(
         this IConfigurationBuilder builder,
         string repositoryConfigurationPath,
