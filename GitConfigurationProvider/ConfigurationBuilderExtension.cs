@@ -27,7 +27,8 @@ public static class GitConfigurationProviderExtension
         string globalConfigurationPath,
         string xdgConfigurationPath,
         string systemConfigurationPath,
-        bool optional = true
+        bool optional = true,
+        bool reloadOnChange = false
     )
     {
         builder.Add(
@@ -36,7 +37,8 @@ public static class GitConfigurationProviderExtension
                 globalConfigurationPath: globalConfigurationPath,
                 xdgConfigurationPath: xdgConfigurationPath,
                 systemConfigurationPath: systemConfigurationPath,
-                optional: optional
+                optional: optional,
+                reloadOnChange: reloadOnChange
             )
         );
         return builder;
