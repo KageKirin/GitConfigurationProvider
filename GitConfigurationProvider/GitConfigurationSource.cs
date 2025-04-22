@@ -23,7 +23,8 @@ public class GitConfigurationSource : IConfigurationSource
         string globalConfigurationPath,
         string xdgConfigurationPath,
         string systemConfigurationPath,
-        bool optional = true
+        bool optional = true,
+        bool reloadOnChange = false
     )
     {
         buildAction = () =>
@@ -32,7 +33,8 @@ public class GitConfigurationSource : IConfigurationSource
                 globalConfigurationPath: globalConfigurationPath,
                 xdgConfigurationPath: xdgConfigurationPath,
                 systemConfigurationPath: systemConfigurationPath,
-                optional: optional
+                optional: optional,
+                reloadOnChange: reloadOnChange
             );
     }
 
