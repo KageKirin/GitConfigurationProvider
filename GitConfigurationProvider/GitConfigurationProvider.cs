@@ -20,10 +20,7 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
         : this(path: Environment.CurrentDirectory, optional: optional) { }
 
     public GitConfigurationProvider(string path, bool optional = true)
-    {
-        this.configuration = LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null);
-        this.optional = optional;
-    }
+        : this(LibGit2Sharp.Configuration.BuildFrom(Repository.Discover(path), null, null, null), optional: optional) { }
 
     public override void Load()
     {
