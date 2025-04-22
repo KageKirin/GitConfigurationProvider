@@ -13,9 +13,9 @@ public class GitConfigurationSource : IConfigurationSource
         buildAction = () => new GitConfigurationProvider(optional: optional);
     }
 
-    public GitConfigurationSource(string path, bool optional = true)
+    public GitConfigurationSource(string path, bool optional = true, bool reloadOnChange = false)
     {
-        buildAction = () => new GitConfigurationProvider(path: path, optional: optional);
+        buildAction = () => new GitConfigurationProvider(path: path, optional: optional, reloadOnChange: reloadOnChange);
     }
 
     public GitConfigurationSource(
