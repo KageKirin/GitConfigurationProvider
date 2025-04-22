@@ -14,4 +14,25 @@ public static class GitConfigurationProviderExtension
         builder.Add(new GitConfigurationSource(path: path, optional: optional));
         return builder;
     }
+
+    public static IConfigurationBuilder AddGitConfig(
+        this IConfigurationBuilder builder,
+        string repositoryConfigurationPath,
+        string globalConfigurationPath,
+        string xdgConfigurationPath,
+        string systemConfigurationPath,
+        bool optional = true
+    )
+    {
+        builder.Add(
+            new GitConfigurationSource(
+                repositoryConfigurationPath: repositoryConfigurationPath,
+                globalConfigurationPath: globalConfigurationPath,
+                xdgConfigurationPath: xdgConfigurationPath,
+                systemConfigurationPath: systemConfigurationPath,
+                optional: optional
+            )
+        );
+        return builder;
+    }
 }
