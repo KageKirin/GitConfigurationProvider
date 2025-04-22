@@ -30,7 +30,8 @@ public class GitConfigurationProvider : ConfigurationProvider, IDisposable
         string globalConfigurationPath,
         string xdgConfigurationPath,
         string systemConfigurationPath,
-        bool optional = true
+        bool optional = true,
+        bool reloadOnChange = false
     )
         : this(
             configuration: LibGit2Sharp.Configuration.BuildFrom(
