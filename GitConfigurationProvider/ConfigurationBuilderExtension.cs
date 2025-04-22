@@ -9,9 +9,14 @@ public static class GitConfigurationProviderExtension
     public static IConfigurationBuilder AddGitConfig(this IConfigurationBuilder builder, bool optional = true) =>
         AddGitConfig(builder, path: Environment.CurrentDirectory, optional: optional);
 
-    public static IConfigurationBuilder AddGitConfig(this IConfigurationBuilder builder, string path, bool optional = true)
+    public static IConfigurationBuilder AddGitConfig(
+        this IConfigurationBuilder builder,
+        string path,
+        bool optional = true,
+        bool reloadOnChange = false
+    )
     {
-        builder.Add(new GitConfigurationSource(path: path, optional: optional));
+        builder.Add(new GitConfigurationSource(path: path, optional: optional, reloadOnChange: reloadOnChange));
         return builder;
     }
 
@@ -27,7 +32,8 @@ public static class GitConfigurationProviderExtension
         string globalConfigurationPath,
         string xdgConfigurationPath,
         string systemConfigurationPath,
-        bool optional = true
+        bool optional = true,
+        bool reloadOnChange = false
     )
     {
         builder.Add(
@@ -36,7 +42,8 @@ public static class GitConfigurationProviderExtension
                 globalConfigurationPath: globalConfigurationPath,
                 xdgConfigurationPath: xdgConfigurationPath,
                 systemConfigurationPath: systemConfigurationPath,
-                optional: optional
+                optional: optional,
+                reloadOnChange: reloadOnChange
             )
         );
         return builder;
