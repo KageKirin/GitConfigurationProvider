@@ -1,4 +1,5 @@
 using System;
+using LibGit2Sharp;
 using Microsoft.Extensions.Configuration;
 
 namespace KageKirin.Extensions.Configuration.GitConfig;
@@ -33,6 +34,11 @@ public class GitConfigurationSource : IConfigurationSource
                 systemConfigurationPath: systemConfigurationPath,
                 optional: optional
             );
+    }
+
+    public GitConfigurationSource(Repository repository, bool optional = true)
+    {
+        buildAction = () => new GitConfigurationProvider(repository: repository, optional: optional);
     }
 
     public IConfigurationProvider Build(IConfigurationBuilder builder)
