@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="build settings">
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>git-config-watcher</ToolCommandName>
+  </PropertyGroup>
+
+  <PropertyGroup Label="build metadata">
+    <PackageId>KageKirin.GitConfigurationWatcher</PackageId>
+    <Title>Git Configuration Watcher</Title>
+    <Description>Test program for GitConfigurationProvider</Description>
+    <PackageTags>configuration;git;gitconfig</PackageTags>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageIconUrl>https://raw.github.com/KageKirin/GitConfigurationProvider/main/Icon.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <ItemGroup Label="build dependencies">
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="LibGit2Sharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\GitConfigurationProvider\GitConfigurationProvider.csproj" />
+  </ItemGroup>
+
+</Project>
