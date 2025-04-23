@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="build settings">
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <OutputType>WinExe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <UseAppHost>true</UseAppHost>
+    <ToolCommandName>git-config-view</ToolCommandName>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <ApplicationIcon>$(MSBuildThisFileDirectory)..\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Label="build metadata">
+    <PackageId>KageKirin.GitConfigurationReader</PackageId>
+    <Title>Git Configuration Reader</Title>
+    <Description>Test program for GitConfigurationProvider</Description>
+    <PackageTags>configuration;git;gitconfig</PackageTags>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageIconUrl>https://raw.github.com/KageKirin/GitConfigurationProvider/main/Icon.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <ItemGroup Label="build dependencies">
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.ReactiveUI" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="Avalonia.Diagnostics">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference><PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\GitConfigurationProvider\GitConfigurationProvider.csproj" />
+  </ItemGroup>
+</Project>
