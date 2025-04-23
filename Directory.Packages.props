@@ -12,6 +12,9 @@
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup Label="avalonia dependencies">
+  </ItemGroup>
+
   <ItemGroup Label="functionality dependencies">
     <PackageVersion Include="LibGit2Sharp" Version="0.31.0" />
   </ItemGroup>
