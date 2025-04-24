@@ -20,11 +20,8 @@ public partial class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
-        HostApplicationBuilder builder = Host.CreateApplicationBuilder();
-        builder.Configuration.Sources.Clear();
-        builder.Configuration.AddGitConfig(path: Environment.CurrentDirectory, reloadOnChange: true);
-        //builder.Services.AddTransient<LogConfigService>();
-        GlobalHost = builder.Build();
+        var hostBuilder = CreateHostBuilder();
+        GlobalHost = hostBuilder.Build();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -42,5 +39,15 @@ public partial class App : Application
 
         // start Host as background task to avoid blocking the main UI thread
         await GlobalHost.StartAsync();
+    }
+
+    private static HostApplicationBuilder CreateHostBuilder()
+    {
+        // alternative: use Host.CreateDefaultBuilder
+        var builder = Host.CreateApplicationBuilder(Environment.GetCommandLineArgs());
+        builder.Configuration.Sources.Clear();
+        builder.Configuration.AddGitConfig(path: Environment.CurrentDirectory, reloadOnChange: true);
+        //builder.Services.AddTransient<LogConfigService>();
+        return builder;
     }
 }
