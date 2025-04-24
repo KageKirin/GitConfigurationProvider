@@ -18,7 +18,7 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    public override async void OnFrameworkInitializationCompleted()
     {
         HostApplicationBuilder builder = Host.CreateApplicationBuilder();
         builder.Configuration.Sources.Clear();
@@ -39,5 +39,8 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+
+        // start Host as background task to avoid blocking the main UI thread
+        await GlobalHost.StartAsync();
     }
 }
