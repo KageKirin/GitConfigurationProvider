@@ -25,8 +25,7 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow();
-
+            desktop.MainWindow = GlobalHost.Services.GetRequiredService<MainWindow>();
             desktop.Exit += (sender, args) =>
             {
                 GlobalHost.StopAsync(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult();
@@ -48,6 +47,9 @@ public partial class App : Application
         builder.Configuration.Sources.Clear();
         builder.Configuration.AddGitConfig(path: Environment.CurrentDirectory, reloadOnChange: true);
         //builder.Services.AddTransient<LogConfigService>();
+
+        builder.Services.AddTransient<MainWindow>();
+
         return builder;
     }
 }
