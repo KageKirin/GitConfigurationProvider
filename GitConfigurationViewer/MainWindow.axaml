@@ -10,8 +10,13 @@
         Background="Transparent"
         x:DataType="vm:MainWindowViewModel"
         >
-  Welcome to Avalonia!
+
   <Design.DataContext>
     <vm:MainWindowViewModel/>
   </Design.DataContext>
+
+  <StackPanel>
+    <DataGrid Margin="20" AutoGenerateColumns="True" ItemsSource="{CompiledBinding Aliases}" />
+  </StackPanel>
+
 </Window>
