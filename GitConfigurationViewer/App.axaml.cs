@@ -50,6 +50,7 @@ public partial class App : Application
         builder.Configuration.AddEnvironmentVariables();
         //builder.Services.AddTransient<LogConfigService>();
 
+        builder.Services.AddTransient<MainWindowViewModel>();
         builder.Services.AddTransient<MainWindow>();
 
         return builder;
