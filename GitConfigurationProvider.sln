@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitConfigurationWatcher", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitConfigurationViewer", "GitConfigurationViewer\GitConfigurationViewer.csproj", "{113276AA-4807-47A4-8DE7-0E484A82DD53}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D4C4A632-814C-461C-A894-4E09718A293A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationTests", "Tests\ConfigurationTests\ConfigurationTests.csproj", "{F1907C08-6014-48EE-AA22-60EB0E043F31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,12 @@ Global
 		{113276AA-4807-47A4-8DE7-0E484A82DD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{113276AA-4807-47A4-8DE7-0E484A82DD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{113276AA-4807-47A4-8DE7-0E484A82DD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1907C08-6014-48EE-AA22-60EB0E043F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1907C08-6014-48EE-AA22-60EB0E043F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1907C08-6014-48EE-AA22-60EB0E043F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1907C08-6014-48EE-AA22-60EB0E043F31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F1907C08-6014-48EE-AA22-60EB0E043F31} = {D4C4A632-814C-461C-A894-4E09718A293A}
 	EndGlobalSection
 EndGlobal
