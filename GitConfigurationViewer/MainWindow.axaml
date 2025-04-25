@@ -11,4 +11,7 @@
         x:DataType="vm:MainWindowViewModel"
         >
   Welcome to Avalonia!
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
 </Window>
