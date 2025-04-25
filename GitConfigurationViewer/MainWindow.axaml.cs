@@ -1,11 +1,12 @@
 using System;
 using Avalonia.Controls;
+using Avalonia.ReactiveUI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace GitConfigurationViewer;
 
-public partial class MainWindow : Window
+public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     public MainWindow(IConfiguration configuration, MainWindowViewModel viewModel, ILogger<MainWindow> logger)
     {
