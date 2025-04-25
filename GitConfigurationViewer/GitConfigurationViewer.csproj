@@ -45,4 +45,8 @@
   <ItemGroup>
     <ProjectReference Include="$(MSBuildThisFileDirectory)..\GitConfigurationProvider\GitConfigurationProvider.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

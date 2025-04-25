@@ -46,6 +46,7 @@ public partial class App : Application
         var builder = Host.CreateApplicationBuilder(Environment.GetCommandLineArgs());
         builder.Configuration.Sources.Clear();
         builder.Configuration.AddGitConfig(path: Environment.CurrentDirectory, reloadOnChange: true);
+        builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
         //builder.Services.AddTransient<LogConfigService>();
 
         builder.Services.AddTransient<MainWindow>();
