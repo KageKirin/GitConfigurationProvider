@@ -39,7 +39,7 @@ public class MainWindowViewModel : ViewModelBase, IActivatableViewModel
 
     public ReactiveCommand<Unit, Unit> RefreshAliases { get; }
 
-    public ObservableCollection<KeyValuePair<string, string>> Aliases { get; }
+    public ObservableCollection<Alias> Aliases { get; }
 
     #region IActivatableViewModel
     public ViewModelActivator Activator { get; } = new();
