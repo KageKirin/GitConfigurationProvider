@@ -91,3 +91,42 @@ public class LocalUserConfigurationTest : IClassFixture<TestRepositoryFixture>
         Assert.Equal(localUserEmail, config["user:email"]);
     }
 }
+
+public class GlobalAliasConfigurationTest : IClassFixture<TestRepositoryFixture>
+{
+    private readonly TestRepositoryFixture fixture;
+    private const string aliasName = "foobar";
+    private const string aliasCommand = "add --patch";
+
+    public GlobalAliasConfigurationTest(TestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.Repository.Config.AddAlias(alias: aliasName, command: aliasCommand);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.Equal(aliasCommand, fixture.Repository.Config.Get<string>($"alias.{aliasName}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal(aliasCommand, config.GetRequiredSection("alias")[aliasName]);
+    }
+}
