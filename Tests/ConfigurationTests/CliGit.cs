@@ -29,4 +29,6 @@ public static class CliGit
 
         return process.ExitCode;
     }
+
+    public static int Init(string path) => RunCommand($"git -C {path} init");
 }
