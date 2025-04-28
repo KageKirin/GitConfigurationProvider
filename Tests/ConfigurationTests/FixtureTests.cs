@@ -39,3 +39,21 @@ public class TempDirectoryFixtureTest : IClassFixture<TempDirectoryFixture>
         Assert.True(Directory.Exists(fixture.RepoDirectory));
     }
 }
+
+public class TestRepositoryFixtureTest : IClassFixture<TestRepositoryFixture>
+{
+    private readonly TestRepositoryFixture fixture;
+
+    public TestRepositoryFixtureTest(TestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+    }
+
+    [Fact]
+    public void Test()
+    {
+        Assert.True(true);
+        Console.WriteLine($"fixture.RepoDirectory: {fixture.RepoDirectory}");
+        Assert.True(Directory.Exists(fixture.RepoDirectory));
+    }
+}
