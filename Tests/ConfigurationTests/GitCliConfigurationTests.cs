@@ -157,3 +157,44 @@ public class CliGitLocalAliasConfigurationTest : IClassFixture<CliGitTestReposit
         Assert.Equal(aliasCommand, config.GetRequiredSection("alias")[aliasName]);
     }
 }
+
+public class CliGitGlobalRebaseConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
+{
+    private readonly CliGitTestRepositoryFixture fixture;
+    private const string autostashKey = "autostash";
+    private const bool autostashValue = true;
+    private const string autosquashKey = "autosquash";
+    private const bool autosquashValue = true;
+
+    public CliGitGlobalRebaseConfigurationTest(CliGitTestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+
+        CliGit.ConfigRebase(path: fixture.RepoDirectory, key: autostashKey, value: autostashValue);
+        CliGit.ConfigRebase(path: fixture.RepoDirectory, key: autosquashKey, value: autosquashValue);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.True(fixture.Repository.Config.Get<bool>($"rebase.{autostashKey}").Value);
+        Assert.True(fixture.Repository.Config.Get<bool>($"rebase.{autosquashKey}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal("true", config.GetRequiredSection("rebase")[autostashKey]);
+        Assert.Equal("true", config.GetRequiredSection("rebase")[autosquashKey]);
+    }
+}
