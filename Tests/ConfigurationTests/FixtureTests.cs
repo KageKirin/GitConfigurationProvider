@@ -57,3 +57,21 @@ public class TestRepositoryFixtureTest : IClassFixture<TestRepositoryFixture>
         Assert.True(Directory.Exists(fixture.RepoDirectory));
     }
 }
+
+public class CliGitTestRepositoryFixtureTest : IClassFixture<CliGitTestRepositoryFixture>
+{
+    private readonly CliGitTestRepositoryFixture fixture;
+
+    public CliGitTestRepositoryFixtureTest(CliGitTestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+    }
+
+    [Fact]
+    public void Test()
+    {
+        Assert.True(true);
+        Console.WriteLine($"fixture.RepoDirectory: {fixture.RepoDirectory}");
+        Assert.True(Directory.Exists(fixture.RepoDirectory));
+    }
+}
