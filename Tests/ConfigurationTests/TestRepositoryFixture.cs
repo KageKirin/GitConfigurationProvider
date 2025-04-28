@@ -30,3 +30,9 @@ public class TempDirectory : IDisposable
         Directory.Delete(RepoDirectory, recursive: true);
     }
 }
+
+public class TempDirectoryFixture : TempDirectory
+{
+    public TempDirectoryFixture()
+        : base(prefix: null) { }
+}
