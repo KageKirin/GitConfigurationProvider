@@ -45,3 +45,49 @@ public class GlobalUserConfigurationTest : IClassFixture<TestRepositoryFixture>
         Assert.Equal(userEmail, config["user:email"]);
     }
 }
+
+public class LocalUserConfigurationTest : IClassFixture<TestRepositoryFixture>
+{
+    private readonly TestRepositoryFixture fixture;
+    private const string globalUserName = "globalUser";
+    private const string globalUserEmail = "global@localhost.com";
+    private const string localUserName = "localUser";
+    private const string localUserEmail = "local@localhost.com";
+
+    public LocalUserConfigurationTest(TestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.Repository.Config.ConfigUserName(userName: globalUserName);
+        fixture.Repository.Config.ConfigUserEmail(userEmail: globalUserEmail);
+        fixture.Repository.Config.ConfigLocalUserName(userName: localUserName);
+        fixture.Repository.Config.ConfigLocalUserEmail(userEmail: localUserEmail);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.Equal(localUserName, fixture.Repository.Config.Get<string>("user.name").Value);
+        Assert.Equal(localUserEmail, fixture.Repository.Config.Get<string>("user.email").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal(localUserName, config["user:name"]);
+        Assert.Equal(localUserEmail, config["user:email"]);
+    }
+}
