@@ -56,3 +56,15 @@ public abstract class TempRepositoryFixture : TempDirectoryFixture
         base.Dispose(disposing: disposing);
     }
 }
+
+public class TestRepositoryFixture : TempRepositoryFixture
+{
+    public TestRepositoryFixture()
+        : base(
+            factory: (path) =>
+            {
+                Repository.Init(path: path);
+                return new Repository(path);
+            }
+        ) { }
+}
