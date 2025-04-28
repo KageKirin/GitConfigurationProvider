@@ -42,3 +42,46 @@ public class CliGitGlobalUserConfigurationTest : IClassFixture<CliGitTestReposit
         Assert.Equal(userEmail, config["user:email"]);
     }
 }
+
+public class CliGitLocalUserConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
+{
+    private readonly CliGitTestRepositoryFixture fixture;
+    private const string globalUserName = "globalUser";
+    private const string globalUserEmail = "global@localhost.com";
+    private const string localUserName = "localUser";
+    private const string localUserEmail = "local@localhost.com";
+
+    public CliGitLocalUserConfigurationTest(CliGitTestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+
+        CliGit.ConfigUserName(path: fixture.RepoDirectory, userName: globalUserName);
+        CliGit.ConfigUserEmail(path: fixture.RepoDirectory, userEmail: globalUserEmail);
+        CliGit.ConfigLocalUserName(path: fixture.RepoDirectory, userName: localUserName);
+        CliGit.ConfigLocalUserEmail(path: fixture.RepoDirectory, userEmail: localUserEmail);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.Equal(localUserName, fixture.Repository.Config.Get<string>("user.name").Value);
+        Assert.Equal(localUserEmail, fixture.Repository.Config.Get<string>("user.email").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal(localUserName, config["user:name"]);
+        Assert.Equal(localUserEmail, config["user:email"]);
+    }
+}
