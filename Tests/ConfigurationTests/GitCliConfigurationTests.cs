@@ -121,3 +121,39 @@ public class CliGitGlobalAliasConfigurationTest : IClassFixture<CliGitTestReposi
         Assert.Equal(aliasCommand, config.GetRequiredSection("alias")[aliasName]);
     }
 }
+
+public class CliGitLocalAliasConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
+{
+    private readonly CliGitTestRepositoryFixture fixture;
+    private const string aliasName = "foobar";
+    private const string aliasCommand = "add --patch";
+
+    public CliGitLocalAliasConfigurationTest(CliGitTestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+
+        CliGit.AddLocalAlias(path: fixture.RepoDirectory, alias: aliasName, command: aliasCommand);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.Equal(aliasCommand, fixture.Repository.Config.Get<string>($"alias.{aliasName}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal(aliasCommand, config.GetRequiredSection("alias")[aliasName]);
+    }
+}
