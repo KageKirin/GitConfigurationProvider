@@ -68,3 +68,15 @@ public class TestRepositoryFixture : TempRepositoryFixture
             }
         ) { }
 }
+
+public class CliGitTestRepositoryFixture : TempRepositoryFixture
+{
+    public CliGitTestRepositoryFixture()
+        : base(
+            factory: (path) =>
+            {
+                CliGit.Init(path: path);
+                return new Repository(path);
+            }
+        ) { }
+}
