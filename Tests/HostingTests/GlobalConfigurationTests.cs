@@ -178,3 +178,43 @@ public class GlobalPullConfigurationTest : IClassFixture<HostingFixture>
         Assert.Equal("true", config.GetRequiredSection("pull")[autostashKey]);
     }
 }
+
+public class GlobalRerereConfigurationTest : IClassFixture<HostingFixture>
+{
+    private readonly HostingFixture fixture;
+
+    private const bool toggleValue = true;
+
+    public GlobalRerereConfigurationTest(HostingFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.ToggleRerere(value: toggleValue);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.True(fixture.Repository.Config.Get<bool>($"rerere.enabled").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        using IHost host = fixture.CreateHost();
+        IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+
+        Assert.Equal("true", config.GetRequiredSection("rerere")["enabled"]);
+    }
+}
