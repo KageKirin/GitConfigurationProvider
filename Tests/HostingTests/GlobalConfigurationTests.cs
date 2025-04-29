@@ -263,3 +263,43 @@ public class GlobalGearTokenConfigurationTest : IClassFixture<HostingFixture>
         Assert.Equal(gearToken, config[$"gears:{gearUrl.Replace(".", ":")}:token"]);
     }
 }
+
+public class GlobalLoggingLevelConfigurationTest : IClassFixture<HostingFixture>
+{
+    private readonly HostingFixture fixture;
+    private const string loggingSection = "Default";
+    private const string loggingLevel = "Trace";
+
+    public GlobalLoggingLevelConfigurationTest(HostingFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.SetLogging(key: loggingSection, value: loggingLevel);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.Equal(loggingLevel, fixture.Repository.Config.Get<string>($"Logging.LogLevel.{loggingSection}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        using IHost host = fixture.CreateHost();
+        IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+
+        Assert.Equal(loggingLevel, config.GetRequiredSection("Logging").GetRequiredSection("LogLevel")[loggingSection]);
+    }
+}
