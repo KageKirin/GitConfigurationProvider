@@ -357,3 +357,39 @@ public class CliGitGlobalRerereConfigurationTest : IClassFixture<CliGitTestRepos
         Assert.Equal("true", config.GetRequiredSection("rerere")["enabled"]);
     }
 }
+
+public class CliGitLocalRerereConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
+{
+    private readonly CliGitTestRepositoryFixture fixture;
+
+    private const bool toggleValue = true;
+
+    public CliGitLocalRerereConfigurationTest(CliGitTestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+
+        CliGit.ToggleLocalRerere(path: fixture.RepoDirectory, value: toggleValue);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.True(fixture.Repository.Config.Get<bool>($"rerere.enabled").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal("true", config.GetRequiredSection("rerere")["enabled"]);
+    }
+}
