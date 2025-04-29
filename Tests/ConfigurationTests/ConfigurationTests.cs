@@ -550,3 +550,42 @@ public class GlobalLoggingLevelConfigurationTest : IClassFixture<TestRepositoryF
         Assert.Equal(loggingLevel, config.GetRequiredSection("Logging").GetRequiredSection("LogLevel")[loggingSection]);
     }
 }
+
+public class LocalLoggingLevelConfigurationTest : IClassFixture<TestRepositoryFixture>
+{
+    private readonly TestRepositoryFixture fixture;
+    private const string loggingSection = "Default";
+    private const string loggingLevel = "Trace";
+
+    public LocalLoggingLevelConfigurationTest(TestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.Repository.Config.SetLocalLogging(key: loggingSection, value: loggingLevel);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.Equal(loggingLevel, fixture.Repository.Config.Get<string>($"Logging.LogLevel.{loggingSection}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal(loggingLevel, config.GetRequiredSection("Logging").GetRequiredSection("LogLevel")[loggingSection]);
+    }
+}
