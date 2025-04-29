@@ -467,3 +467,47 @@ public class GlobalGearTokenConfigurationTest : IClassFixture<TestRepositoryFixt
         Assert.Equal(gearToken, config[$"gears:{gearUrl.Replace(".", ":")}:token"]);
     }
 }
+
+public class LocalGearTokenConfigurationTest : IClassFixture<TestRepositoryFixture>
+{
+    private readonly TestRepositoryFixture fixture;
+    private const string gearUrl = "gitlove.com";
+    private readonly string gearToken = $"ghe_{Convert.ToBase64String(Guid.NewGuid().ToByteArray())}";
+
+    public LocalGearTokenConfigurationTest(TestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.Repository.Config.AddLocalGearsToken(url: gearUrl, token: gearToken);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.Equal(gearToken, fixture.Repository.Config.Get<string>($"gears.{gearUrl}.token").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+        Assert.NotNull(config.GetSection("gears"));
+        Assert.NotNull(config.GetRequiredSection("gears").GetChildren());
+        Assert.NotNull(config.GetSection($"gears:{gearUrl.Replace(".", ":")}"));
+        Assert.NotNull(config[$"gears:{gearUrl.Replace(".", ":")}:token"]);
+
+        Assert.Equal(gearToken, config.GetRequiredSection("gears").GetRequiredSection(gearUrl.Replace(".", ":"))["token"]);
+        Assert.Equal(gearToken, config[$"gears:{gearUrl.Replace(".", ":")}:token"]);
+    }
+}
