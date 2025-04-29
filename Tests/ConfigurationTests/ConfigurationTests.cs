@@ -384,3 +384,42 @@ public class GlobalRerereConfigurationTest : IClassFixture<TestRepositoryFixture
         Assert.Equal("true", config.GetRequiredSection("rerere")["enabled"]);
     }
 }
+
+public class LocalRerereConfigurationTest : IClassFixture<TestRepositoryFixture>
+{
+    private readonly TestRepositoryFixture fixture;
+
+    private const bool toggleValue = true;
+
+    public LocalRerereConfigurationTest(TestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.Repository.Config.ToggleLocalRerere(value: toggleValue);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.True(fixture.Repository.Config.Get<bool>($"rerere.enabled").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal("true", config.GetRequiredSection("rerere")["enabled"]);
+    }
+}
