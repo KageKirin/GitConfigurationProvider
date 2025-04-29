@@ -134,3 +134,48 @@ public class LocalRebaseConfigurationTest : IClassFixture<HostingFixture>
         Assert.Equal("true", config.GetRequiredSection("rebase")[autosquashKey]);
     }
 }
+
+public class LocalPullConfigurationTest : IClassFixture<HostingFixture>
+{
+    private readonly HostingFixture fixture;
+    private const string rebaseKey = "rebase";
+    private const bool rebaseValue = true;
+    private const string autostashKey = "autostash";
+    private const bool autostashValue = true;
+
+    public LocalPullConfigurationTest(HostingFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.ConfigPull(key: rebaseKey, value: rebaseValue, level: ConfigurationLevel.Local);
+        fixture.ConfigPull(key: autostashKey, value: autostashValue, level: ConfigurationLevel.Local);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.True(fixture.Repository.Config.Get<bool>($"pull.{rebaseKey}").Value);
+        Assert.True(fixture.Repository.Config.Get<bool>($"pull.{autostashKey}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        using IHost host = fixture.CreateHost();
+        IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+
+        Assert.Equal("true", config.GetRequiredSection("pull")[rebaseKey]);
+        Assert.Equal("true", config.GetRequiredSection("pull")[autostashKey]);
+    }
+}
