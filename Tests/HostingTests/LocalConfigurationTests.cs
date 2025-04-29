@@ -89,3 +89,48 @@ public class LocalAliasConfigurationTest : IClassFixture<HostingFixture>
         Assert.Equal(aliasCommand, config.GetRequiredSection("alias")[aliasName]);
     }
 }
+
+public class LocalRebaseConfigurationTest : IClassFixture<HostingFixture>
+{
+    private readonly HostingFixture fixture;
+    private const string autostashKey = "autostash";
+    private const bool autostashValue = true;
+    private const string autosquashKey = "autosquash";
+    private const bool autosquashValue = true;
+
+    public LocalRebaseConfigurationTest(HostingFixture fixture)
+    {
+        this.fixture = fixture;
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        fixture.ConfigRebase(key: autostashKey, value: autostashValue, level: ConfigurationLevel.Local);
+        fixture.ConfigRebase(key: autosquashKey, value: autosquashValue, level: ConfigurationLevel.Local);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.True(fixture.Repository.Config.Get<bool>($"rebase.{autostashKey}").Value);
+        Assert.True(fixture.Repository.Config.Get<bool>($"rebase.{autosquashKey}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        using IHost host = fixture.CreateHost();
+        IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+
+        Assert.Equal("true", config.GetRequiredSection("rebase")[autostashKey]);
+        Assert.Equal("true", config.GetRequiredSection("rebase")[autosquashKey]);
+    }
+}
