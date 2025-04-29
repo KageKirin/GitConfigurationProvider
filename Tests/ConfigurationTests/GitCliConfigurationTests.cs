@@ -280,3 +280,44 @@ public class CliGitGlobalPullConfigurationTest : IClassFixture<CliGitTestReposit
         Assert.Equal("true", config.GetRequiredSection("pull")[autostashKey]);
     }
 }
+
+public class CliGitLocalPullConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
+{
+    private readonly CliGitTestRepositoryFixture fixture;
+    private const string rebaseKey = "rebase";
+    private const bool rebaseValue = true;
+    private const string autostashKey = "autostash";
+    private const bool autostashValue = true;
+
+    public CliGitLocalPullConfigurationTest(CliGitTestRepositoryFixture fixture)
+    {
+        this.fixture = fixture;
+
+        CliGit.ConfigLocalPull(path: fixture.RepoDirectory, key: rebaseKey, value: rebaseValue);
+        CliGit.ConfigLocalPull(path: fixture.RepoDirectory, key: autostashKey, value: autostashValue);
+    }
+
+    [Fact]
+    public void TestLib()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.Repository);
+        Assert.NotNull(fixture.Repository.Config);
+
+        Assert.True(fixture.Repository.Config.Get<bool>($"pull.{rebaseKey}").Value);
+        Assert.True(fixture.Repository.Config.Get<bool>($"pull.{autostashKey}").Value);
+    }
+
+    [Fact]
+    public void TestConfig()
+    {
+        Assert.NotNull(fixture);
+        Assert.NotNull(fixture.RepoDirectory);
+        Assert.NotEmpty(fixture.RepoDirectory);
+
+        IConfiguration config = new ConfigurationBuilder().AddGitConfig(path: fixture.RepoDirectory).Build();
+
+        Assert.Equal("true", config.GetRequiredSection("pull")[rebaseKey]);
+        Assert.Equal("true", config.GetRequiredSection("pull")[autostashKey]);
+    }
+}
