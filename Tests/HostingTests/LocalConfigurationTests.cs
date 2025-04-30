@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HostingTests;
 
+[Collection("Sequential")]
 public class LocalUserConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -50,6 +51,7 @@ public class LocalUserConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalAliasConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -90,6 +92,7 @@ public class LocalAliasConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalRebaseConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -135,6 +138,7 @@ public class LocalRebaseConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalPullConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -180,6 +184,7 @@ public class LocalPullConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalRerereConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -220,6 +225,7 @@ public class LocalRerereConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalGearTokenConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -265,6 +271,7 @@ public class LocalGearTokenConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalLoggingLevelConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
