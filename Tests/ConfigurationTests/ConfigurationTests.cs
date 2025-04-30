@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ConfigurationTests;
 
+[Collection("Sequential")]
 public class GlobalUserConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -46,6 +47,7 @@ public class GlobalUserConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalUserConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -92,6 +94,7 @@ public class LocalUserConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalAliasConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -131,6 +134,7 @@ public class GlobalAliasConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalAliasConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -170,6 +174,7 @@ public class LocalAliasConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalRebaseConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -214,6 +219,7 @@ public class GlobalRebaseConfigurationTest : IClassFixture<TestRepositoryFixture
     }
 }
 
+[Collection("Sequential")]
 public class LocalRebaseConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -258,6 +264,7 @@ public class LocalRebaseConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalPullConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -302,6 +309,7 @@ public class GlobalPullConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class LocalPullConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -346,6 +354,7 @@ public class LocalPullConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalRerereConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -385,6 +394,7 @@ public class GlobalRerereConfigurationTest : IClassFixture<TestRepositoryFixture
     }
 }
 
+[Collection("Sequential")]
 public class LocalRerereConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -424,6 +434,7 @@ public class LocalRerereConfigurationTest : IClassFixture<TestRepositoryFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalGearTokenConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -468,6 +479,7 @@ public class GlobalGearTokenConfigurationTest : IClassFixture<TestRepositoryFixt
     }
 }
 
+[Collection("Sequential")]
 public class LocalGearTokenConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -512,6 +524,7 @@ public class LocalGearTokenConfigurationTest : IClassFixture<TestRepositoryFixtu
     }
 }
 
+[Collection("Sequential")]
 public class GlobalLoggingLevelConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;
@@ -551,6 +564,7 @@ public class GlobalLoggingLevelConfigurationTest : IClassFixture<TestRepositoryF
     }
 }
 
+[Collection("Sequential")]
 public class LocalLoggingLevelConfigurationTest : IClassFixture<TestRepositoryFixture>
 {
     private readonly TestRepositoryFixture fixture;

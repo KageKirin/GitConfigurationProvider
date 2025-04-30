@@ -1,4 +1,5 @@
 using KageKirin.Extensions.Configuration.GitConfig;
+using LibGit2Sharp;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HostingTests;
 
+[Collection("Sequential")]
 public class GlobalUserConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -19,8 +21,8 @@ public class GlobalUserConfigurationTest : IClassFixture<HostingFixture>
         Assert.NotNull(fixture.Repository);
         Assert.NotNull(fixture.Repository.Config);
 
-        fixture.ConfigUserName(userName: userName);
-        fixture.ConfigUserEmail(userEmail: userEmail);
+        fixture.ConfigUserName(userName: userName, level: ConfigurationLevel.Global);
+        fixture.ConfigUserEmail(userEmail: userEmail, level: ConfigurationLevel.Global);
     }
 
     [Fact]
@@ -49,6 +51,7 @@ public class GlobalUserConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalAliasConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -62,7 +65,7 @@ public class GlobalAliasConfigurationTest : IClassFixture<HostingFixture>
         Assert.NotNull(fixture.Repository);
         Assert.NotNull(fixture.Repository.Config);
 
-        fixture.AddAlias(alias: aliasName, command: aliasCommand);
+        fixture.AddAlias(alias: aliasName, command: aliasCommand, level: ConfigurationLevel.Global);
     }
 
     [Fact]
@@ -89,6 +92,7 @@ public class GlobalAliasConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalRebaseConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -104,8 +108,8 @@ public class GlobalRebaseConfigurationTest : IClassFixture<HostingFixture>
         Assert.NotNull(fixture.Repository);
         Assert.NotNull(fixture.Repository.Config);
 
-        fixture.ConfigRebase(key: autostashKey, value: autostashValue);
-        fixture.ConfigRebase(key: autosquashKey, value: autosquashValue);
+        fixture.ConfigRebase(key: autostashKey, value: autostashValue, level: ConfigurationLevel.Global);
+        fixture.ConfigRebase(key: autosquashKey, value: autosquashValue, level: ConfigurationLevel.Global);
     }
 
     [Fact]
@@ -134,6 +138,7 @@ public class GlobalRebaseConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalPullConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -149,8 +154,8 @@ public class GlobalPullConfigurationTest : IClassFixture<HostingFixture>
         Assert.NotNull(fixture.Repository);
         Assert.NotNull(fixture.Repository.Config);
 
-        fixture.ConfigPull(key: rebaseKey, value: rebaseValue);
-        fixture.ConfigPull(key: autostashKey, value: autostashValue);
+        fixture.ConfigPull(key: rebaseKey, value: rebaseValue, level: ConfigurationLevel.Global);
+        fixture.ConfigPull(key: autostashKey, value: autostashValue, level: ConfigurationLevel.Global);
     }
 
     [Fact]
@@ -179,6 +184,7 @@ public class GlobalPullConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalRerereConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -192,7 +198,7 @@ public class GlobalRerereConfigurationTest : IClassFixture<HostingFixture>
         Assert.NotNull(fixture.Repository);
         Assert.NotNull(fixture.Repository.Config);
 
-        fixture.ToggleRerere(value: toggleValue);
+        fixture.ToggleRerere(value: toggleValue, level: ConfigurationLevel.Global);
     }
 
     [Fact]
@@ -219,6 +225,7 @@ public class GlobalRerereConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalGearTokenConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -232,7 +239,7 @@ public class GlobalGearTokenConfigurationTest : IClassFixture<HostingFixture>
         Assert.NotNull(fixture.Repository);
         Assert.NotNull(fixture.Repository.Config);
 
-        fixture.AddGearsToken(url: gearUrl, token: gearToken);
+        fixture.AddGearsToken(url: gearUrl, token: gearToken, level: ConfigurationLevel.Global);
     }
 
     [Fact]
@@ -264,6 +271,7 @@ public class GlobalGearTokenConfigurationTest : IClassFixture<HostingFixture>
     }
 }
 
+[Collection("Sequential")]
 public class GlobalLoggingLevelConfigurationTest : IClassFixture<HostingFixture>
 {
     private readonly HostingFixture fixture;
@@ -277,7 +285,7 @@ public class GlobalLoggingLevelConfigurationTest : IClassFixture<HostingFixture>
         Assert.NotNull(fixture.Repository);
         Assert.NotNull(fixture.Repository.Config);
 
-        fixture.SetLogging(key: loggingSection, value: loggingLevel);
+        fixture.SetLogging(key: loggingSection, value: loggingLevel, level: ConfigurationLevel.Global);
     }
 
     [Fact]

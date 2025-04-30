@@ -64,6 +64,7 @@ public class TestRepositoryFixture : TempRepositoryFixture
             factory: (path) =>
             {
                 Repository.Init(path: path);
+                CliGit.ConfigUserName(path: path, "globalGitUser");
                 return new Repository(path);
             }
         ) { }
