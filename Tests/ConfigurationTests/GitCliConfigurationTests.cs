@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ConfigurationTests;
 
+[Collection("Sequential")]
 public class CliGitGlobalUserConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -43,6 +44,7 @@ public class CliGitGlobalUserConfigurationTest : IClassFixture<CliGitTestReposit
     }
 }
 
+[Collection("Sequential")]
 public class CliGitLocalUserConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -86,6 +88,7 @@ public class CliGitLocalUserConfigurationTest : IClassFixture<CliGitTestReposito
     }
 }
 
+[Collection("Sequential")]
 public class CliGitGlobalAliasConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -122,6 +125,7 @@ public class CliGitGlobalAliasConfigurationTest : IClassFixture<CliGitTestReposi
     }
 }
 
+[Collection("Sequential")]
 public class CliGitLocalAliasConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -158,6 +162,7 @@ public class CliGitLocalAliasConfigurationTest : IClassFixture<CliGitTestReposit
     }
 }
 
+[Collection("Sequential")]
 public class CliGitGlobalRebaseConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -199,6 +204,7 @@ public class CliGitGlobalRebaseConfigurationTest : IClassFixture<CliGitTestRepos
     }
 }
 
+[Collection("Sequential")]
 public class CliGitLocalRebaseConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -240,6 +246,7 @@ public class CliGitLocalRebaseConfigurationTest : IClassFixture<CliGitTestReposi
     }
 }
 
+[Collection("Sequential")]
 public class CliGitGlobalPullConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -281,6 +288,7 @@ public class CliGitGlobalPullConfigurationTest : IClassFixture<CliGitTestReposit
     }
 }
 
+[Collection("Sequential")]
 public class CliGitLocalPullConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -322,6 +330,7 @@ public class CliGitLocalPullConfigurationTest : IClassFixture<CliGitTestReposito
     }
 }
 
+[Collection("Sequential")]
 public class CliGitGlobalRerereConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -358,6 +367,7 @@ public class CliGitGlobalRerereConfigurationTest : IClassFixture<CliGitTestRepos
     }
 }
 
+[Collection("Sequential")]
 public class CliGitLocalRerereConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -394,6 +404,7 @@ public class CliGitLocalRerereConfigurationTest : IClassFixture<CliGitTestReposi
     }
 }
 
+[Collection("Sequential")]
 public class CliGitGlobalGearTokenConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -430,6 +441,7 @@ public class CliGitGlobalGearTokenConfigurationTest : IClassFixture<CliGitTestRe
     }
 }
 
+[Collection("Sequential")]
 public class CliGitLocalGearTokenConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -466,6 +478,7 @@ public class CliGitLocalGearTokenConfigurationTest : IClassFixture<CliGitTestRep
     }
 }
 
+[Collection("Sequential")]
 public class CliGitGlobalLoggingLevelConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
@@ -502,6 +515,7 @@ public class CliGitGlobalLoggingLevelConfigurationTest : IClassFixture<CliGitTes
     }
 }
 
+[Collection("Sequential")]
 public class CliGitLocalLoggingLevelConfigurationTest : IClassFixture<CliGitTestRepositoryFixture>
 {
     private readonly CliGitTestRepositoryFixture fixture;
